@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Odoo Fiance And Marketing Live TV Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <script>
+        window.ODOO_BASE_URL = "{{ odoo_url }}";
+    </script>
+
+    <div class="dashboard-wrapper">
+
+
+        <div class="dashboard">
+
+            <!-- COLUMN 1 : FINANCE -->
+            <div class="column">
+                <section class="panel" id="panel-invoice">
+                    <header class="panel-header">
+                        <h2 class="panel-title">INCOMPLETE ORDERS<br>(<span id="count-invoice">0</span>)</h2>
+                        <img src="{{ url_for('static', filename='asset/Group 199.svg') }}" alt="Expand"
+                            class="icon-expand expand-trigger" data-target="panel-invoice">
+                        <span class="icon-close close-trigger" data-target="panel-invoice">&times;</span>
+                    </header>
+                    <div class="panel-controls">
+                        <div class="controls-row">
+                            <div class="search-bar">
+                                <img src="{{ url_for('static', filename='asset/search-glass.svg') }}"
+                                    class="icon-search">
+                                <input type="text" placeholder="Search ...." class="search-input"
+                                    onkeyup="filterList('list-incomplete-invoice', this.value)">
+
+                            </div>
+                            <div class="filter-box" style="margin-left: 5px;">
+                                <img src="{{ url_for('static', filename='asset/filter.svg') }}"
+                                    class="icon-filter-inside">
+                                <span class="filter-text">Filter</span>
+                            </div>
+                            <div class="panel-tabs" id="tabs-invoice">
+                                <button class="tab-btn" data-warehouse="top 1">Top 1</button>
+                                <button class="tab-btn" data-warehouse="top 2">Top 2</button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="panel-content" id="list-incomplete-invoice">
+                        <!-- Cards injected by JS -->
+                        <div class="text-xs text-muted" style="padding:10px;">Loading data...</div>
+                    </div>
+                </section>
+
+                <section class="panel" id="panel-overshoot">
+                    <header class="panel-header">
+                        <h2 class="panel-title">
+                            BALANCE OVERSHOOTS<br>(<span id="count-overshoot">0</span>)
+                        </h2>
+                        <img src="{{ url_for('static', filename='asset/Group 199.svg') }}" alt="Expand"
+                            class="icon-expand expand-trigger" data-target="panel-overshoot">
+                        <span class="icon-close close-trigger" data-target="panel-overshoot">&times;</span>
+                    </header>
+
+                    <div class="panel-controls">
+                        <div class="controls-row">
+                            <div class="search-bar">
+                                <img src="{{ url_for('static', filename='asset/search-glass.svg') }}"
+                                    class="icon-search">
+                                <input type="text" placeholder="Search ...." class="search-input"
+                                    onkeyup="filterList('list-balance-overshoot', this.value)">
+                            </div>
+
+                            <div class="filter-box">
+                                <img src="{{ url_for('static', filename='asset/filter.svg') }}"
+                                    class="icon-filter-inside">
+                                <span class="filter-text">Filter</span>
+                            </div>
+                            <div class="panel-tabs" id="tabs-overshoot">
+                                <button class="tab-btn" data-warehouse="top 1">Top 1</button>
+                                <button class="tab-btn" data-warehouse="top 2">Top 2</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-content" id="list-balance-overshoot">
+                        <!-- Metric cards injected by JS -->
+                        <div class="text-xs text-muted" style="padding:10px;">
+                            Loading data...
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+
+
+
+            <!-- COLUMN 2 : ACCOUNTING -->
+            <div class="column">
+                <section class="panel" id="panel-journal">
+                    <header class="panel-header">
+                        <h2 class="panel-title">UNPOSTED JOURNALS<br>(<span id="count-journal">0</span>)</h2>
+                        <img src="{{ url_for('static', filename='asset/Group 199.svg') }}" alt="Expand"
+                            class="icon-expand expand-trigger" data-target="panel-journal">
+                        <span class="icon-close close-trigger" data-target="panel-journal">&times;</span>
+                    </header>
+                    <div class="panel-controls">
+                        <div class="controls-row">
+                            <div class="search-bar">
+                                <img src="{{ url_for('static', filename='asset/search-glass.svg') }}"
+                                    class="icon-search">
+                                <input type="text" placeholder="Search ...." class="search-input"
+                                    onkeyup="filterList('list-unposted-journal', this.value)">
+                            </div>
+                            <div class="filter-box">
+                                <img src="{{ url_for('static', filename='asset/filter.svg') }}"
+                                    class="icon-filter-inside">
+                                <span class="filter-text">Filter</span>
+                            </div>
+                            <div class="panel-tabs" id="tabs-journal">
+                                <button class="tab-btn" data-source="deposit">Deposit</button>
+                                <button class="tab-btn" data-source="journal">Journal</button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="panel-content" id="list-unposted-journal">
+                        <!-- Cards injected by JS -->
+                        <div class="text-xs text-muted" style="padding:10px;">Loading data...</div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- COLUMN 3 : SALES PIPELINE -->
+            <div class="column">
+                <section class="panel" id="panel-quotation">
+                    <header class="panel-header quotation-header">
+                        <h2 class="panel-title">ACTIVE QUOTATIONS<br>(<span id="count-quotation">0</span>)</h2>
+                        <img src="{{ url_for('static', filename='asset/Group 199.svg') }}" alt="Expand"
+                            class="icon-expand expand-trigger" data-target="panel-quotation">
+                        <span class="icon-close close-trigger" data-target="panel-quotation">&times;</span>
+                    </header>
+                    <div class="panel-controls">
+                        <div class="controls-row">
+                            <div class="search-bar">
+                                <img src="{{ url_for('static', filename='asset/search-glass.svg') }}"
+                                    class="icon-search">
+                                <input type="text" placeholder="Search ...." class="search-input"
+                                    onkeyup="filterList('list-active-quotation', this.value)">
+                            </div>
+                            <div class="filter-box">
+                                <img src="{{ url_for('static', filename='asset/filter.svg') }}"
+                                    class="icon-filter-inside">
+                                <span class="filter-text">Filter</span>
+                            </div>
+                            <div class="panel-tabs" id="tabs-quotation">
+                                <button class="tab-btn" data-warehouse="top 1">Top 1</button>
+                                <button class="tab-btn" data-warehouse="top 2">Top 2</button>
+                                <button class="tab-btn" data-warehouse="top 3">Top 3</button>
+                                <button class="tab-btn" data-warehouse="top 4">Top 4</button>
+                                <button class="tab-btn" data-warehouse="top 5">Top 5</button>
+                                <button class="tab-btn" data-warehouse="top 6">Top 6</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="panel-content" id="list-active-quotation">
+                        <!-- Cards injected by JS -->
+                        <div class="text-xs text-muted" style="padding:10px;">Loading data...</div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- COLUMN 4 : CUSTOMERS -->
+            <div class="column">
+                <section class="panel" id="panel-customers">
+                    <header class="panel-header">
+                        <h2 class="panel-title">NEW CUSTOMERS<br>(<span id="count-new-customers">0</span>)</h2>
+                        <img src="{{ url_for('static', filename='asset/Group 199.svg') }}" alt="Expand"
+                            class="icon-expand expand-trigger" data-target="panel-customers">
+                        <span class="icon-close close-trigger" data-target="panel-customers">&times;</span>
+                    </header>
+                    <div class="panel-controls">
+                        <div class="controls-row">
+                            <div class="search-bar">
+                                <img src="{{ url_for('static', filename='asset/search-glass.svg') }}"
+                                    class="icon-search">
+                                <input type="text" placeholder="Search ...." class="search-input"
+                                    onkeyup="filterList('list-new-customers', this.value)">
+                            </div>
+                            <div class="filter-box">
+                                <img src="{{ url_for('static', filename='asset/filter.svg') }}"
+                                    class="icon-filter-inside">
+                                <span class="filter-text">Filter</span>
+                            </div>
+                            <div class="panel-tabs" id="tabs-customers">
+                                <button class="tab-btn" data-warehouse="top 1">Top 1</button>
+                                <button class="tab-btn" data-warehouse="top 2">Top 2</button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="panel-content" id="list-new-customers">
+                        <div class="text-xs text-muted" style="padding:10px;">Loading data...</div>
+                        <!-- Cards injected by JS -->
+                    </div>
+                </section>
+            </div>
+
+            <!-- COLUMN 5 : RECONCILIATIONS -->
+            <div class="column">
+                <section class="panel" id="panel-reconciliation">
+                    <header class="panel-header">
+                        <h2 class="panel-title">RECONCILIATIONS<br>(<span id="count-reconciliation">0</span>)</h2>
+                        <img src="{{ url_for('static', filename='asset/Group 199.svg') }}" alt="Expand"
+                            class="icon-expand expand-trigger" data-target="panel-reconciliation">
+                        <span class="icon-close close-trigger" data-target="panel-reconciliation">&times;</span>
+                    </header>
+                    <div class="panel-controls">
+                        <div class="controls-row">
+                            <div class="search-bar">
+                                <img src="{{ url_for('static', filename='asset/search-glass.svg') }}"
+                                    class="icon-search">
+                                <input type="text" placeholder="Search ...." class="search-input"
+                                    onkeyup="filterList('list-reconciliation', this.value)">
+                            </div>
+                            <div class="filter-box">
+                                <img src="{{ url_for('static', filename='asset/filter.svg') }}"
+                                    class="icon-filter-inside">
+                                <span class="filter-text">Filter</span>
+                            </div>
+                            <div class="panel-tabs" id="tabs-reconciliation">
+                                <button class="tab-btn" data-warehouse="top 1">Top 1</button>
+                                <button class="tab-btn" data-warehouse="top 2">Top 2</button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="panel-content" id="list-reconciliation">
+                        <!-- Metric cards injected by JS -->
+                    </div>
+                </section>
+            </div>
+
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+</body>
+
+</html>
